@@ -2,16 +2,18 @@ package com.example;
 
 import java.util.List;
 
+import static com.example.Literals.*;
+
 public class Feline extends Animal implements Predator {
 
     @Override
     public List<String> eatMeat() throws Exception {
-        return getFood("Хищник");
+        return getFood(ANIMAL_KIND_PREDATOR);
     }
 
     @Override
     public String getFamily() {
-        return "Кошачьи";
+        return ANIMAL_FAMILY_VALUE;
     }
 
     public int getKittens() {
