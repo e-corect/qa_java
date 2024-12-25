@@ -1,7 +1,9 @@
 import com.example.Feline;
 import com.example.Lion;
 import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -15,14 +17,24 @@ public class LionTests {
     @Mock
     private Feline feline;
 
+    @Rule
+    public final ExpectedException thrown = ExpectedException.none();
+
     @Test
     public void lionWrongSexTest() {
         try {
             Lion lion = new Lion(WRONG_SEX_VALUE, feline);
             lion.doesHaveMane();
-        } catch (Exception e){
+        } catch (Exception e) {
             Assert.assertEquals(WRONG_ANIMAL_SEX_ERROR, e.getMessage());
         }
+    }
+
+    @Test
+    public void lionWrongSexSecondWayTest() {
+        thrown.expect(IllegalArgumentException.class);
+        thrown.expectMessage(WRONG_ANIMAL_SEX_ERROR);
+        throw new IllegalArgumentException(WRONG_ANIMAL_SEX_ERROR, new IllegalArgumentException());
     }
 
     @Test
